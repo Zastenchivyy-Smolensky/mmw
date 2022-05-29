@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>変数の使用と要素内容への書き込み</h1>
+    <div id="now"></div>
+    <p><button type="button" onclick="update()">追加</button></p>
+
+    <script>
+      "use strict";
+      const elem = document.getElementById("now");
+      const date = new Date();
+      elem.innerHTML = "今は" + date.toLocaleDateString() + "です";
+      function update() {
+        const date = new Date();
+        elem.textContent = "クリック時は" + date.toLocaleDateString() + "です";
+      }
+    </script>
+  </body>
+</html>

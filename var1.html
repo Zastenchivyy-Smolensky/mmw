@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>変数の有効範囲</h1>
+    <div id="global"></div>
+    <div id="inFuncA"></div>
+    <script>
+      "use strict";
+      let w = 3,
+        x;
+      let y = 5,
+        z;
+      function showWxyz(elem) {
+        elem.textContent = "w=" + w + "x=" + x + "y=" + y + "z=" + z;
+      }
+      function funcA(elem) {
+        function showWxyz(elem) {
+          elem.textContent = "w=" + w + "x=" + x + "y=" + y + "z=" + z;
+        }
+        let x = 11;
+        let y;
+        let z = 13;
+        const elem = document.getElementById("inFuncA");
+        showWxyz(elem);
+      }
+      setX(7);
+      const elem = document.getElementById("global");
+      showWxyz(elem);
+      funcA;
+    </script>
+  </body>
+</html>
