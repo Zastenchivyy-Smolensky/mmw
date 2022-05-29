@@ -1,22 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>画像による時間の表示(縦板)</title>
     <script src="timeimage.js"></script>
   </head>
   <body>
     <div style="font-size: 50%">
-      現在の時間(20c2007 影山亮太) &emsp; tz;
+      現在の時間(20c2007 影山亮太) &emsp; tz:
       <input
         type="number"
         id="zoneHour"
         value="9"
         min="-12"
+        max="14"
         style="width: 3em"
       />
+      時間
     </div>
+    <div id="timeimage"></div>
   </body>
 </html>
