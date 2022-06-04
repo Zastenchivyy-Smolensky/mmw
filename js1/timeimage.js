@@ -53,7 +53,7 @@
     let s = hour > 12 ? 24 - hour : hour;
     s = s * 15 + 70;
     const ss = s.toString(16);
-    return "#" + ss + ss + "44";
+    return `#` + ss + ss + `44`;
   }
 
   class TimeImageUpdater {
@@ -83,7 +83,7 @@
       if (d2 !== this.hour2) {
         this.hour2 = d2;
         setDigit(HOUR_IDX + 1, d2);
-        document.body.backgroundColor = bg(h);
+        document.body.style.backgroundColor = bg(h);
       }
 
       d2 = m % 10;
