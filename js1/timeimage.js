@@ -2,7 +2,7 @@
   "use strict";
   const TOP = 10;
   const LEFT = 10;
-  const WIDTH = 60;
+  const WIDTH = 80;
   const HEIGHT = 120;
   const SHIFT_DIV = 3;
   const HOUR_IDX = 0;
