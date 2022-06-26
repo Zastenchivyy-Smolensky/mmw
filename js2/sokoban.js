@@ -3,7 +3,7 @@
   const CELL_WIDTH = 40;
   const CELL_HEIGHT = 40;
   const WALL_IMG = "block.png";
-  const GOAL_IMG = "2.png";
+  const GOAL_IMG = "goal.png";
   const PLAYER_IMG = "index.png";
   const BOX_IMG = "box.png";
   const IN_COLOR = "aquamarine";
@@ -225,7 +225,7 @@
       alert("荷物の数" + cb + "とゴールの数" + a.length + "が一致しません");
     }
     if (cp !== 1) {
-      alert("プレーヤー数" + cp + "が1と違います");
+      alert("プレーヤー数" + cp + "�?1と違いま�?");
     }
     return a;
   }
