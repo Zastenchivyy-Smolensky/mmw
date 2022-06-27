@@ -76,7 +76,10 @@
   let etimeElem;
   let canvasElem;
   let ctx;
-
+  let moves;
+  let probSelectElem;
+  let undoButtonElem;
+  let resetButtonElem;
   function onKeyDown(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -197,7 +200,7 @@
   }
 
   function isGoal() {
-    return goals.every(g => board[g[1]][g[0]] & BOX_BIT);
+    return goals.every((g) => board[g[1]][g[0]] & BOX_BIT);
   }
   function getGoalList() {
     const a = new Array();
@@ -218,13 +221,13 @@
     }
 
     if (a.length === 0) {
-      alert("ƒS[ƒ‹‚ª‚ ‚è‚Ü‚¹‚ñ");
+      alert("ï¿½Sï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
     }
     if (cb !== a.length) {
-      alert("‰×•¨‚Ì”" + cb + "‚ÆƒS[ƒ‹‚Ì”" + a.length + "‚ªˆê’v‚µ‚Ü‚¹‚ñ");
+      alert("ï¿½×•ï¿½ï¿½Ìï¿½" + cb + "ï¿½ÆƒSï¿½[ï¿½ï¿½ï¿½Ìï¿½" + a.length + "ï¿½ï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½");
     }
     if (cp !== 1) {
-      alert("ƒvƒŒ[ƒ„[”" + cp + "1‚Æˆá‚¢‚Ü‚·");
+      alert("ï¿½vï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½[ï¿½ï¿½" + cp + "1ï¿½Æˆá‚¢ï¿½Ü‚ï¿½");
     }
     return a;
   }
