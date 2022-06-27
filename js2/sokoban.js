@@ -28,7 +28,7 @@
     [
       [9, 9, 9, 8, 8, 8, 8, 8],
       [8, 8, 8, 8, 0, 0, 0, 8],
-      [8, 1, 0, 2, 0, 1, 0, 8],
+      [8, 1, 0, 2, 1, 0, 0, 8],
       [8, 0, 8, 2, 8, 0, 8, 8],
       [8, 0, 0, 4, 0, 0, 8, 9],
       [8, 8, 8, 8, 8, 8, 8, 9],
@@ -39,7 +39,6 @@
       [9, 8, 0, 0, 0, 8, 8, 8, 8],
       [8, 8, 8, 2, 0, 0, 0, 0, 8],
       [8, 0, 0, 0, 8, 2, 8, 0, 8],
-      [8, 0, 2, 0, 8, 0, 0, 0, 8],
       [8, 0, 2, 0, 8, 0, 0, 0, 8],
       [8, 0, 0, 0, 8, 8, 8, 8, 8],
       [8, 8, 8, 8, 8, 9, 9, 9, 9],
@@ -172,7 +171,7 @@
     if (b & GOAL_BIT) {
       ctx.drawImage(
         iGoal,
-        x + CELL_WIDTH,
+        x * CELL_WIDTH,
         y * CELL_HEIGHT,
         CELL_WIDTH,
         CELL_HEIGHT
@@ -198,7 +197,7 @@
   }
 
   function isGoal() {
-    return goals.every((g) => board[g[1][g[0]]] & BOX_BIT);
+    return goals.every(g => board[g[1]][g[0]] & BOX_BIT);
   }
   function getGoalList() {
     const a = new Array();
@@ -219,13 +218,13 @@
     }
 
     if (a.length === 0) {
-      alert("繧ｴ繝ｼ繝ｫ縺後≠繧翫∪縺帙ｓ");
+      alert("ゴールがありません");
     }
     if (cb !== a.length) {
-      alert("闕ｷ迚ｩ縺ｮ謨ｰ" + cb + "縺ｨ繧ｴ繝ｼ繝ｫ縺ｮ謨ｰ" + a.length + "縺御ｸ閾ｴ縺励∪縺帙ｓ");
+      alert("荷物の数" + cb + "とゴールの数" + a.length + "が一致しません");
     }
     if (cp !== 1) {
-      alert("繝励Ξ繝ｼ繝､繝ｼ謨ｰ" + cp + "縺?1縺ｨ驕輔＞縺ｾ縺?");
+      alert("プレーヤー数" + cp + "1と違います");
     }
     return a;
   }
@@ -234,7 +233,7 @@
     etimeElem.textContent = ((Date.now() - startTime) / 1000).toFixed();
   }
 
-  function startGeme() {
+  function startGame() {
     const s = Math.floor(Math.random() * problems.length) + 1;
 
     board = new Array();
@@ -280,7 +279,7 @@
     loaded() {
       if (--this.loading === 0) {
         canvasElem.style.visibility = "";
-        startGeme();
+        startGame();
       }
     }
   }
