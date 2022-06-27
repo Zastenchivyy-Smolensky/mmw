@@ -119,6 +119,7 @@
       xPlayer = xp;
       yPlayer = yp;
       drawPlaer();
+      moves.push({ action: action, push: false });
       ++step;
       stepElem.textContent = step.toString();
     } else if (board[yb][xb] < WALL_VAL && !(board[yb][xb] & BOX_BIT)) {
@@ -132,7 +133,7 @@
       xPlayer = xp;
       yPlayer = yp;
       drawPlaer();
-
+      moves.push({ action: action, push: true });
       ++step;
       stepElem.textContent = step.toString();
       ++push;
@@ -237,7 +238,7 @@
   }
 
   function startGame() {
-    const s = Math.floor(Math.random() * problems.length) + 1;
+    const s = parseInt(probSelectElem.value);
 
     board = new Array();
     for (let i = 0; i < problems[s - 1].length; ++i) {
@@ -252,6 +253,8 @@
     ctx.fillStyle = OUT_COLOR;
     drawBoard();
 
+    moves = new Array();
+
     countUpTimer = setInterval(countUp, 400);
 
     step = 0;
@@ -260,12 +263,56 @@
     pushElem.textContent = push.toString();
     startTime = Date.now();
     document.body.addEventListener("keydown", onKeyDown, true);
+    undoButtonElem.disabled = false;
   }
   function stopGame() {
     if (!countUpTimer) return;
     clearInterval(countUpTimer);
     countUpTimer = undefined;
     document.body.removeEventListener("keydown", onkeydown, true);
+    undoButtonElem.disabled = true;
+  }
+
+  function undoMove() {
+    const m = moves.pop();
+    if (!m) return;
+    let xp = xPlayer;
+    let yp = yPlayer;
+    let xb = xp;
+    let yb = yp;
+    switch (m.action) {
+      case A_LEFT:
+        xb = xp - 1;
+        ++xp;
+        break;
+      case A_RIGHT:
+        xb = xp + 1;
+        --xp;
+        break;
+      case A_UP:
+        yb = yp - 1;
+        ++yp;
+        break;
+      case A_DOWN:
+        yb = yp + 1;
+        --yp;
+        break;
+    }
+    board[yPlayer][xPlayer] &= ~PLAYER_BIT;
+    board[yp][xp] |= PLAYER_BIT;
+    if (m.push) {
+      board[yb][xb] &= ~BOX_BIT;
+      drawCell(xb, yb);
+      board[yPlayer][xPlayer] |= BOX_BIT;
+      --push;
+      pushElem.textContent = push.toString();
+    }
+    drawCell(xPlayer, yPlayer);
+    xPlayer = xp;
+    yPlayer = xp;
+    drawPlaer();
+    --step;
+    stepElem.textContent = step.toString();
   }
   class ImageLoader {
     set(...names) {
@@ -291,6 +338,10 @@
     pushElem = document.getElementById("push");
     etimeElem = document.getElementById("etime");
 
+    probSelectElem = document.getElementById("probSelect");
+    undoButtonElem = document.getElementById("undoButton");
+    resetButtonElem = document.getElementById("resetButton");
+
     canvasElem = document.getElementById("soko");
     canvasElem.style.visibility = "hidden";
     canvasElem.style.backgroundColor = IN_COLOR;
@@ -301,6 +352,24 @@
       PLAYER_IMG,
       BOX_IMG
     );
+    for (let i = 1; i <= problems.length; ++i) {
+      const o = document.createElement("option");
+      o.value = i.toString();
+      o.textContent = i.toString();
+      if (i === 1) o.selected = true;
+      probSelectElem.appendChild(o);
+    }
+    probSelectElem.addEventListener("change", () => {
+      stopGame();
+      startGame();
+    });
+    undoButtonElem.addEventListener("click", () => {
+      undoMove();
+    });
+    resetButtonElem.addEventListener("click", () => {
+      stopGame();
+      startGame();
+    });
   }
   document.addEventListener("DOMContentLoaded", init);
 })();
