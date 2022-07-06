@@ -7,21 +7,19 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>変数の使用と要�?�?容への書き込み</h1>
+    <h1>変数の使用と要�容への書き込み</h1>
     <div id="now"></div>
-    <p><button type="button" onclick="update()">追�?</button></p>
+    <p><button type="button" onclick="update()">追�?</button></p>
 
     <script>
       "use strict";
       const elem = document.getElementById("now");
       const date = new Date();
-      elem.innerHTML = "今�?�" + date.toLocaleDateString() + "で�?";
+      elem.innerHTML = "今�?�" + date.toLocaleDateString() + "で�?";
       function update() {
         const date = new Date();
-        elem.textContent = "クリ�?ク時�?�" + date.toLocaleDateString() + "で�?";
+        elem.textContent = "クリ�?ク時�?�" + date.toLocaleDateString() + "で�?";
       }
     </script>
   </body>
 </html>
-
-
